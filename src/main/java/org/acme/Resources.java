@@ -14,10 +14,10 @@ import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
 @Path("/")
-public class GreetingResource {
+public class Resources {
 
     @Inject
-    GreetingService service;
+    GreetingService greetingService;
 
     @Inject
     PersonService personService;
@@ -32,19 +32,19 @@ public class GreetingResource {
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/greeting/{name}")
     public String greeting(String name) {
-        return service.greeting(name);
+        return greetingService.greeting(name);
     }
 
     @POST
+    @Path("/task1")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/task1")
     public String task1(String json) {
         return json;
     }
 
     @POST
-    @Path("/savePerson")
+    @Path("/task2")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response savePerson(String json) {
@@ -55,7 +55,7 @@ public class GreetingResource {
     }
 
     @GET
-    @Path("/getPeople")
+    @Path("/task3")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllNames() {
         List<String> names = personService.getAllNames();
